@@ -1,0 +1,18 @@
+[submodule "gateway"]
+    path = gateway
+    url = https://github.com/happyDuke96/gateway.git
+[submodule "config-server"]
+    path = config-server
+    url = https://github.com/happyDuke96/config-server.git
+[submodule "discovery-server"]
+    path = discovery-server
+    url = https://github.com/happyDuke96/discovery-server.git
+[submodule "auth-service"]
+    path = auth-service
+    url = https://github.com/happyDuke96/auth-service.git
+[submodule "otp-service"]
+    path = otp-service
+    url = https://github.com/happyDuke96/otp-service.git
+[submodule "facade"]
+    path = facade
+    url = https://github.com/happyDuke96/facade.git
