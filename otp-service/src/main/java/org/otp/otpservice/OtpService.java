@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
 public class OtpService {
 
     private static final Integer EXPIRE_MIN = 5;
-    private LoadingCache<String, String> otpCache;
+    private final LoadingCache<String, String> otpCache;
 
     public OtpService() {
         otpCache = CacheBuilder.newBuilder()
@@ -32,7 +32,7 @@ public class OtpService {
 
     private String getRandomOTP(String username) {
         String otp = new DecimalFormat("0000")
-                .format(new Random().nextInt(999999));
+                .format(new Random().nextInt(9999));
         otpCache.put(username, otp);
         return otp;
     }
