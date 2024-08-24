@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  redis:
+    image: 'redis:6.2-alpine'
+    container_name: 'redis'
+    ports:
+      - "6379:6379"
+    restart: unless-stopped
+    networks:
+      - code-generator-service
+  app:
+    depends_on:
+      - redis
+    build: .
+    restart: on-failure
+    env_file: ./.env
+    ports:
+      - '8761:8761'
+    expose:
+      - '8761'
+    volumes:
+      - .m2:/root/.m2
+    networks:
+      - code-generator-service
+
+volumes:
+  db:
+  cache:
+    driver: local
+networks:
+  code-generator-service:
+    external: true
