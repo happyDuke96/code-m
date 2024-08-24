@@ -11,12 +11,9 @@ spring:
     name: FACADE-SERVICE
   config:
     import: optional:configserver:http://localhost:8888
-#  thymeleaf:
-#    prefix: classpath:/templates/
-#    suffix: .html
-#  data:
-#    redis:
-#      database: 0
-#      host: localhost
-#      port: 6379
-#      timeout: 60000
+app:
+  config:
+    auth: http://localhost:9000
+logging:
+  level:
+    org.springframework.web: DEBUG

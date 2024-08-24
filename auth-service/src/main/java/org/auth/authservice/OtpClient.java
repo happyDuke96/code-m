@@ -6,6 +6,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 @FeignClient(name = "otp-client", url = "${app.config.otp}")
 public interface OtpClient {
 
@@ -15,4 +17,7 @@ public interface OtpClient {
     @GetMapping("/validate")
     ResponseEntity<Boolean> validateOtp(@RequestParam("code") String code,
                                         @RequestParam("username") String username);
+
+    @GetMapping("/history")
+    ResponseEntity<List<String>> getAllCachedData(@RequestParam("username") String username);
 }

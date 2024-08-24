@@ -45,7 +45,8 @@
     </tbody>
 </table>
 
-<form action="#" th:action="@{/logout}" method="post">
+<form action="#" th:action="@{/facade/logout}" method="get">
+    <input type="hidden" name="username" th:value="${username}"/>
     <button type="submit">Logout</button>
 </form>
 </body>

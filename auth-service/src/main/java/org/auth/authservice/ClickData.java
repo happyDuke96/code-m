@@ -1,8 +1,11 @@
 package org.auth.authservice;
 
-import lombok.Value;
+import lombok.*;
 
-@Value
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class ClickData {
 
     int x;

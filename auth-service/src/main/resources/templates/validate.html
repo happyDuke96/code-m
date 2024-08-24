@@ -47,6 +47,20 @@
 
     <button type="submit">Submit</button>
 </form>
+<h2>Old Generated Codes</h2>
+<table>
+    <thead>
+    <tr>
+        <th>Code</th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr th:each="code : ${oldCodes}">
+        <td th:text="${code}"></td>
+    </tr>
+    </tbody>
+</table>
+
 <p style="color: red;" th:if="${error}" th:text="${error}"></p>
 </body>
 </html>

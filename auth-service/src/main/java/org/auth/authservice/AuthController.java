@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang.BooleanUtils;
 import org.auth.authservice.cache.domain.UserAuth;
 import org.auth.authservice.cache.repository.UserAuthSessionRepository;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -39,7 +40,9 @@ public class AuthController {
     @GetMapping("/code/{username}")
     public String codePage(@ModelAttribute("username") String username,Model model) {
         var otpResponse = otpClient.getOtp(username);
+        var histoyCodes = otpClient.getAllCachedData(username);
         String otpCode = otpResponse.getBody();
+        model.addAttribute("oldCodes",histoyCodes.getBody());
         model.addAttribute("otpCode", otpCode);
         model.addAttribute("username", username);
         return "validate";
@@ -74,6 +77,13 @@ public class AuthController {
         List<ClickData> data = facadeClient.getClickData(username);
         model.addAttribute("data", data);
         return "data-table";
+    }
+
+    @DeleteMapping("/cache/remove")
+    public ResponseEntity<Void> removeFromCache(@RequestParam("username") String username) {
+        List<UserAuth> allSession = sessionRepository.findAllByUsername(username);
+        sessionRepository.deleteAll(allSession);
+        return ResponseEntity.ok().build();
     }
 
 }

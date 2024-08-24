@@ -7,6 +7,8 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
@@ -44,6 +46,14 @@ public class OtpService {
             return otpCache.get(key);
         } catch (Exception e) {
             return "";
+        }
+    }
+
+    public List<String> getAllCachedData(String key) {
+        try {
+             return otpCache.getAllPresent(List.of(key)).values().stream().toList();
+        } catch (Exception e) {
+            return new ArrayList<>();
         }
     }
 

@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1/otp")
 @RequiredArgsConstructor
@@ -20,6 +22,11 @@ public class OtpController {
     public ResponseEntity<Boolean> validateOtp(@RequestParam("code") String code,
                                                @RequestParam("username") String username) {
         return ResponseEntity.ok(otpService.validateOtp(code, username));
+    }
+
+    @GetMapping("/history")
+    public ResponseEntity<List<String>> getAllCachedData(@RequestParam("username") String username) {
+        return ResponseEntity.ok(otpService.getAllCachedData(username));
     }
 
     @DeleteMapping("/remove")
