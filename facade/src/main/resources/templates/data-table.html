@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Click Data</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<h1>Click Data</h1>
+
+<table>
+    <thead>
+    <tr>
+        <th>Дата клика</th>
+        <th>Координата X (пиксели)</th>
+        <th>Координата Y (пиксели)</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="item : ${data}">
+        <td th:text="${item.timestamp}"></td>
+        <td th:text="${item.x}"></td>
+        <td th:text="${item.y}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<form action="#" th:action="@{/logout}" method="post">
+    <button type="submit">Logout</button>
+</form>
+</body>
+</html>

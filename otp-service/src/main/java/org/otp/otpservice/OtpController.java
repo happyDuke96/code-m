@@ -16,6 +16,12 @@ public class OtpController {
         return ResponseEntity.ok(otpService.getOtp(username));
     }
 
+    @GetMapping("/validate")
+    public ResponseEntity<Boolean> validateOtp(@RequestParam("code") String code,
+                                               @RequestParam("username") String username) {
+        return ResponseEntity.ok(otpService.validateOtp(code, username));
+    }
+
     @DeleteMapping("/remove")
     public ResponseEntity<Void> remove() {
         otpService.clearOtp("username");

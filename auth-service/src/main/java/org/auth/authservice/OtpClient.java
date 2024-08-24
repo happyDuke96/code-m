@@ -11,4 +11,8 @@ public interface OtpClient {
 
     @GetMapping("/generate")
     ResponseEntity<String> getOtp(@RequestParam("username") String username);
+
+    @GetMapping("/validate")
+    ResponseEntity<Boolean> validateOtp(@RequestParam("code") String code,
+                                        @RequestParam("username") String username);
 }

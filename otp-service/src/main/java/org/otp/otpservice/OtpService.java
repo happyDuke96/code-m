@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.DecimalFormat;
 import java.util.Random;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 @Service
@@ -43,6 +44,14 @@ public class OtpService {
             return otpCache.get(key);
         } catch (Exception e) {
             return "";
+        }
+    }
+
+    public boolean validateOtp(String key,String code) {
+        try {
+            return otpCache.get(key).equals(code);
+        } catch (ExecutionException e) {
+            return false;
         }
     }
 

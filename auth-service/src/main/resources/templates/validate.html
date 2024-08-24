@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Code Validation</title>
+    <script>
+        document.addEventListener('click', function(event) {
+            const x = event.clientX;
+            const y = event.clientY;
+            const timestamp = new Date().toISOString(); // Current date and time
+
+            // Store click data temporarily in localStorage or send immediately
+            localStorage.setItem('clickData', JSON.stringify({
+                x: x,
+                y: y,
+                timestamp: timestamp
+            }));
+        });
+
+        // Ensure click data is sent to the server upon form submission
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.querySelector('form');
+            form.addEventListener('submit', function() {
+                const clickData = localStorage.getItem('clickData');
+                if (clickData) {
+                    const hiddenInput = document.createElement('input');
+                    hiddenInput.type = 'hidden';
+                    hiddenInput.name = 'clickData';
+                    hiddenInput.value = clickData;
+                    form.appendChild(hiddenInput);
+                    localStorage.removeItem('clickData'); // Clear click data after sending
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+<h1>Enter the Code</h1>
+
+<p>Your OTP code is: <strong th:text="${otpCode}"></strong></p>
+
+<form action="#" th:action="@{/code/validate}" method="post">
+    <input type="hidden" name="username" th:value="${username}">
+    <label for="code">Code:
+        <input id="code" type="text" name="code">
+    </label><br>
+
+    <button type="submit">Submit</button>
+</form>
+<p style="color: red;" th:if="${error}" th:text="${error}"></p>
+</body>
+</html>
